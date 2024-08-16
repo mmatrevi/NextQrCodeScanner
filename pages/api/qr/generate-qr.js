@@ -11,8 +11,16 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const uniqueCode = generateUniqueCode(10);
-      const qrCodeData = await QRCode.toDataURL(uniqueCode);
       const sessionId = uuidv4();
+
+      // Create the data to encode in the QR code
+      const qrData = {
+        code: uniqueCode,
+        sessionId: sessionId,
+      };
+
+      // Convert the object to a string for the QR code
+      const qrCodeData = await QRCode.toDataURL(JSON.stringify(qrData));
 
       const newCodeEntry = new CodeStore({ sessionId, code: uniqueCode });
       await newCodeEntry.save();

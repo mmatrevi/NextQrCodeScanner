@@ -46,7 +46,7 @@ export default function Scan() {
 
       if (response.data.valid) {
         alert("Code validated successfully!");
-        router.push("/home"); // Redirect to home page on success
+        router.push("/"); // Redirect to home page on success
       } else {
         alert("Invalid code, please try again.");
       }
