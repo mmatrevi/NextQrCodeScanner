@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/generate-qr-front": "pages/generate-qr-front.js"
+  "/generate-qr-front": "pages/generate-qr-front.js",
+  "/scan": "pages/scan.js"
 }

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import QrReader from 'react-qr-reader';
+import dynamic from "next/dynamic";
+
+// Dynamically import QrReader with no SSR
+const QrReader = dynamic(() => import("react-qr-scanner"), { ssr: false });
 
 export default function Scan() {
   const [qrData, setQrData] = useState("");
@@ -9,7 +12,7 @@ export default function Scan() {
   const handleScan = (data) => {
     if (data) {
       try {
-        const parsedData = JSON.parse(data); // Parse the JSON string from the data
+        const parsedData = JSON.parse(data.text); // Parse the JSON string from 'text' field
         const currentTime = new Date().getTime();
         const fifteenMinutes = 15 * 60 * 1000; // 15 minutes in milliseconds
 
@@ -34,10 +37,10 @@ export default function Scan() {
     <div className="flex flex-col h-screen justify-center text-center">
       <h1 className="text-4xl font-bold mb-6">Scan QR</h1>
       <QrReader
+        delay={300}
         onError={handleError}
         onScan={handleScan}
         style={{ width: "100%" }}
-        facingMode="environment" // Use back camera
       />
       {qrData && <p>Data: {qrData}</p>}
     </div>

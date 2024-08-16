@@ -1,1 +1,8 @@
-{}
+{
+  "scan.jsx -> react-qr-scanner": {
+    "id": "scan.jsx -> react-qr-scanner",
+    "files": [
+      "static/chunks/node_modules_react-qr-scanner_dist_react-qr-scanner_umd_js.js"
+    ]
+  }
+}
