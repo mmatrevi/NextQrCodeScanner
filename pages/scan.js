@@ -7,15 +7,23 @@ import axios from "axios";
 
 export default function Scan() {
   const router = useRouter();
-  const [data, setData] = useState("No result");
+  const [qrData, setQrData] = useState("No result");
   const [showModal, setShowModal] = useState(false);
   const qrRef = useRef(null);
 
   const handleScan = (result, error) => {
     if (result?.text) {
-      setData(result.text);
-      setShowModal(true);
-      qrRef.current.stop(); // Stop the QR reader once we get a valid result
+      try {
+        const parsedData = JSON.parse(result.text); // Parse JSON from the QR code
+        const { code, sessionId } = parsedData; // Extract enteredCode and sessionId
+
+        setQrData({ code, sessionId });
+        setShowModal(true);
+        qrRef.current.stop(); // Stop the QR reader once we get a valid result
+      } catch (err) {
+        console.error("Error parsing QR code:", err);
+        alert("Invalid QR code format.");
+      }
     }
 
     if (error) {
@@ -29,10 +37,10 @@ export default function Scan() {
   };
 
   const handleOK = async () => {
-    const sessionId = localStorage.getItem("sessionId");
+    const { code, sessionId } = qrData;
     try {
       const response = await axios.post("/api/qr/validate-code", {
-        enteredCode: data,
+        enteredCode: code,
         sessionId,
       });
 
@@ -79,7 +87,8 @@ export default function Scan() {
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
               <div className="bg-white rounded-md p-4">
                 <p className="text-xl font-bold mb-2">Scanned data:</p>
-                <p>{data}</p>
+                <p>Code: {qrData.code}</p>
+                <p>Session ID: {qrData.sessionId}</p>
                 <button
                   className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md mt-4 hover:bg-gray-300"
                   onClick={handleCloseModal}
