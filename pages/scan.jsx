@@ -41,6 +41,7 @@ export default function Scan() {
         onError={handleError}
         onScan={handleScan}
         style={{ width: "100%" }}
+        facingMode="environment" // Use back camera
       />
       {qrData && <p>Data: {qrData}</p>}
     </div>
