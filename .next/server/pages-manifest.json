@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/ViewDataPage": "pages/ViewDataPage.js",
-  "/": "pages/index.js",
-  "/scan": "pages/scan.js"
+  "/scan": "pages/scan.js",
+  "/": "pages/index.js"
 }
