@@ -1,10 +1,8 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import axios from "axios";
+import { QrReader } from "react-qr-reader";
 
-// Dynamically import QrReader with no SSR
-const QrReader = dynamic(() => import("react-qr-scanner"), { ssr: false });
+import axios from "axios";
 
 export default function Scan() {
   const [qrData, setQrData] = useState("");
@@ -40,7 +38,7 @@ export default function Scan() {
   const handleOK = async () => {
     try {
       await axios.post("/api/validate-code", { enteredCode: qrData, sessionId });
-      router.push("/home");
+      router.push("/");
     } catch (error) {
       console.error("Error sending QR code data:", error);
     }
@@ -54,13 +52,15 @@ export default function Scan() {
   return (
     <div className="flex flex-col h-screen justify-center text-center">
       <h1 className="text-4xl font-bold mb-6">Scan QR</h1>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: "100%" }}
-        ref={qrRef}
-      />
+      <div>
+        <QrReader
+          className="lg:h-[400px] lg:w-[400px] h-[300px] w-[300px]"
+          onResult={handleScan}
+          constraints={{ facingMode: "environment" }}
+          style={{ width: "40%", height: "40%" }}
+          ref={qrRef}
+        />
+      </div>
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white rounded-md p-4">
