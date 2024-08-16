@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import QrReader from "react-qr-scanner";  // Correct import for `react-qr-scanner`
+import dynamic from "next/dynamic";
+
+// Dynamically import QrReader with no SSR
+const QrReader = dynamic(() => import("react-qr-scanner"), { ssr: false });
 
 export default function Scan() {
   const [qrData, setQrData] = useState("");
