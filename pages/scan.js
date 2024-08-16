@@ -56,7 +56,7 @@ export default function Scan() {
       <h1 className="text-4xl font-bold mb-6">Scan QR</h1>
       <QrReader
         className="lg:h-[400px] lg:w-[400px] h-[300px] w-[300px]"
-        onResult={handleScan}
+        onScan={handleScan}
         onError={handleError}
         constraints={{ facingMode: "environment" }}
         style={{ width: "40%", height: "40%" }}
