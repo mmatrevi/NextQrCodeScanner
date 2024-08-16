@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import Nav from '../components/Nav';
+import Nav from '../pages/Nav';
 import { getCookie } from 'cookies-next';
 
 export default function Login() {
