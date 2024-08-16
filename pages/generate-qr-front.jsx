@@ -23,13 +23,37 @@ const GenerateQRPage = () => {
     }
   };
 
+  const printQRCode = () => {
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write('<html><head><title>Print QR Code</title></head><body>');
+    printWindow.document.write('<img src="' + qrCodeData + '" alt="QR Code" style="width:100%; height:auto;"/>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+  };
+
   return (
     <>
       <Nav />
-      <div>
-        <h1>Generate QR Code</h1>
-        <button onClick={fetchQRCode}>Generate QR Code</button>
-        {qrCodeData && <img src={qrCodeData} alt="QR Code" />}
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+        <button
+          onClick={fetchQRCode}
+          className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 mb-6"
+        >
+          Generate QR Code
+        </button>
+        {qrCodeData && (
+          <div className="flex flex-col items-center">
+            <img src={qrCodeData} alt="QR Code" className="w-64 h-64 object-contain mb-4" />
+            <button
+              onClick={printQRCode}
+              className="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600"
+            >
+              Print QR Code
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

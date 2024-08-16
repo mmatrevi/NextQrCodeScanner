@@ -44,16 +44,24 @@ const EnterCodePage = () => {
   return (
     <>
       <Nav />
-      <div>
-        <h1>Enter Code</h1>
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+        <h1 className="text-4xl font-bold mb-8">Enter Code</h1>
         <input
           type="text"
           placeholder="Enter Code"
           value={enteredCode}
           onChange={(e) => setEnteredCode(e.target.value)}
+          className="p-3 w-64 border border-gray-300 rounded-md mb-4"
         />
-        <button onClick={handleCodeSubmit}>Submit</button>
-        {isValid === false && <p>Invalid code, please try again.</p>}
+        <button
+          onClick={handleCodeSubmit}
+          className="p-3 w-64 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          Submit
+        </button>
+        {isValid === false && (
+          <p className="text-red-500 mt-4">Invalid code, please try again.</p>
+        )}
       </div>
     </>
   );
