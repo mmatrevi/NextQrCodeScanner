@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/scan": "pages/scan.js",
-  "/Main": "pages/Main.js",
-  "/api/qr/validate-code": "pages/api/qr/validate-code.js"
+  "/": "pages/index.js"
 }
