@@ -40,7 +40,7 @@ export default function Scan() {
         }
       } catch (err) {
         console.error("Error parsing QR code:", err);
-        alert("Invalid QR code format.");
+        alert("Error parsing QR code.");
       }
     }
 
