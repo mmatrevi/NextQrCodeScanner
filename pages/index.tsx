@@ -54,7 +54,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="w-full py-8 bg-gray-800 text-white text-center">
           <p className="text-sm">
-            &copy; {new Date().getFullYear()} My Stylish Landing Page. All rights reserved.
+            &copy; {new Date().getFullYear()} Cyber Problem-Solving Group 12 Project. All rights reserved.
           </p>
         </footer>
       </main>
