@@ -3,5 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/generate-qr-front": "pages/generate-qr-front.js",
-  "/api/qr/generate-qr": "pages/api/qr/generate-qr.js"
+  "/": "pages/index.js"
 }

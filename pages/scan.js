@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { QrReader } from "react-qr-reader";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -7,18 +7,19 @@ import axios from "axios";
 
 export default function Scan() {
   const router = useRouter();
-  const [qrData, setQrData] = useState({ code: "", sessionId: "" });
   const qrRef = useRef(null);
 
   const handleScan = async (result, error) => {
+    if (error) {
+      console.error("QR Reader Error:", error);
+      return;
+    }
+
     if (result?.text) {
       try {
-        // Parse JSON from the QR code
         const parsedData = JSON.parse(result.text);
 
-        // Ensure parsed data contains both 'code' and 'sessionId'
         if (parsedData.code && parsedData.sessionId) {
-          setQrData({ code: parsedData.code, sessionId: parsedData.sessionId });
           qrRef.current.stop(); // Stop the QR reader once we get a valid result
 
           // Automatically submit the QR code data for validation
@@ -30,7 +31,7 @@ export default function Scan() {
           console.log("API Response:", response.data);
 
           if (response.data.valid) {
-            router.push("/Main"); // Redirect to home page on success
+            router.push("/Main"); // Redirect to main page on success
           } else {
             alert("Invalid code, please try again.");
             qrRef.current.start(); // Restart the QR reader if invalid
@@ -39,13 +40,9 @@ export default function Scan() {
           throw new Error("Invalid QR code format.");
         }
       } catch (err) {
-        console.error("Error parsing QR code:", err);
-        alert("Error parsing QR code.");
+        console.error("Error processing QR code:", err);
+        alert("Error processing QR code.");
       }
-    }
-
-    if (error) {
-      console.error("QR Reader Error:", error);
     }
   };
 
