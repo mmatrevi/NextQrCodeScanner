@@ -8,10 +8,9 @@ import axios from "axios";
 export default function Scan() {
   const router = useRouter();
   const [qrData, setQrData] = useState({ code: "", sessionId: "" });
-  const [showModal, setShowModal] = useState(false);
   const qrRef = useRef(null);
 
-  const handleScan = (result, error) => {
+  const handleScan = async (result, error) => {
     if (result?.text) {
       try {
         // Parse JSON from the QR code
@@ -20,55 +19,34 @@ export default function Scan() {
         // Ensure parsed data contains both 'code' and 'sessionId'
         if (parsedData.code && parsedData.sessionId) {
           setQrData({ code: parsedData.code, sessionId: parsedData.sessionId });
-          setShowModal(true);
           qrRef.current.stop(); // Stop the QR reader once we get a valid result
+
+          // Automatically submit the QR code data for validation
+          const response = await axios.post("/api/qr/validate-code", {
+            enteredCode: parsedData.code,
+            sessionId: parsedData.sessionId,
+          });
+
+          console.log("API Response:", response.data);
+
+          if (response.data.valid) {
+            router.push("/Main"); // Redirect to home page on success
+          } else {
+            alert("Invalid code, please try again.");
+            qrRef.current.start(); // Restart the QR reader if invalid
+          }
+        } else {
+          throw new Error("Invalid QR code format.");
         }
       } catch (err) {
-        if (!parsedData.code && !parsedData.sessionId) {
-          console.error("Error parsing QR code:", err);
-          alert("Invalid QR code format.");
-        }
+        console.error("Error parsing QR code:", err);
+        alert("Invalid QR code format.");
       }
     }
 
     if (error) {
       console.error("QR Reader Error:", error);
-      //alert("Error reading QR code. Please try again.");
     }
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    router.reload(); // Reload the page to reset the scanner and modal
-  };
-
-  const handleOK = async () => {
-    const { code, sessionId } = qrData;
-    if (!code || !sessionId) {
-      alert("Invalid QR code data. Please scan again.");
-      return;
-    }
-
-    try {
-      console.log("Submitting Code:", code);
-      console.log("Session ID:", sessionId);
-
-      const response = await axios.post("/api/qr/validate-code", {
-        enteredCode: code,
-        sessionId,
-      });
-
-      console.log("API Response:", response.data);
-
-      if (response.data.valid) {
-        router.push("/Main"); // Redirect to home page on success
-      } else {
-        alert("Invalid code, please try again.");
-      }
-    } catch (error) {
-      console.error("Error submitting code:", error);
-    }
-    handleCloseModal(); // Close the modal after handling the OK action
   };
 
   return (
@@ -97,27 +75,6 @@ export default function Scan() {
           >
             Back to home..
           </Link>
-          {showModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white rounded-md p-4">
-                <p className="text-xl font-bold mb-2">Scanned data:</p>
-                <p>Code: {qrData.code}</p>
-                <p>Session ID: {qrData.sessionId}</p>
-                <button
-                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md mt-4 hover:bg-gray-300"
-                  onClick={handleCloseModal}
-                >
-                  Close
-                </button>
-                <button
-                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md mx-4 mt-4 hover:bg-gray-300"
-                  onClick={handleOK}
-                >
-                  Ok
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </main>
     </>
