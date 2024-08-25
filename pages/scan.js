@@ -7,19 +7,24 @@ import axios from "axios";
 
 export default function Scan() {
   const router = useRouter();
-  const [qrData, setQrData] = useState("No result");
+  const [qrData, setQrData] = useState({ code: "", sessionId: "" });
   const [showModal, setShowModal] = useState(false);
   const qrRef = useRef(null);
 
   const handleScan = (result, error) => {
     if (result?.text) {
       try {
-        const parsedData = JSON.parse(result.text); // Parse JSON from the QR code
-        const { code, sessionId } = parsedData; // Extract enteredCode and sessionId
+        // Parse JSON from the QR code
+        const parsedData = JSON.parse(result.text);
 
-        setQrData({ code, sessionId });
-        setShowModal(true);
-        qrRef.current.stop(); // Stop the QR reader once we get a valid result
+        // Ensure parsed data contains both 'code' and 'sessionId'
+        if (parsedData.code && parsedData.sessionId) {
+          setQrData({ code: parsedData.code, sessionId: parsedData.sessionId });
+          setShowModal(true);
+          qrRef.current.stop(); // Stop the QR reader once we get a valid result
+        } else {
+          throw new Error("Invalid QR code format.");
+        }
       } catch (err) {
         console.error("Error parsing QR code:", err);
         alert("Invalid QR code format.");
@@ -28,6 +33,7 @@ export default function Scan() {
 
     if (error) {
       console.error("QR Reader Error:", error);
+      //alert("Error reading QR code. Please try again.");
     }
   };
 
@@ -38,21 +44,29 @@ export default function Scan() {
 
   const handleOK = async () => {
     const { code, sessionId } = qrData;
+    if (!code || !sessionId) {
+      alert("Invalid QR code data. Please scan again.");
+      return;
+    }
+
     try {
+      console.log("Submitting Code:", code);
+      console.log("Session ID:", sessionId);
+
       const response = await axios.post("/api/qr/validate-code", {
         enteredCode: code,
         sessionId,
       });
 
+      console.log("API Response:", response.data);
+
       if (response.data.valid) {
-        alert("Code validated successfully!");
         router.push("/Main"); // Redirect to home page on success
       } else {
         alert("Invalid code, please try again.");
       }
     } catch (error) {
       console.error("Error submitting code:", error);
-      alert("Failed to validate QR code. Please try again.");
     }
     handleCloseModal(); // Close the modal after handling the OK action
   };
