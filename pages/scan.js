@@ -14,37 +14,49 @@ export default function Scan() {
       console.error("QR Reader Error:", error);
       return;
     }
-
+  
     if (result?.text) {
       try {
+        console.log("Scanned QR Code Text:", result.text);
+  
         const parsedData = JSON.parse(result.text);
-
+        console.log("Parsed QR Data:", parsedData);
+  
         if (parsedData.code && parsedData.sessionId) {
-          qrRef.current.stop(); // Stop the QR reader once we get a valid result
-
+          // Ensure qrRef.current is not null before calling stop()
+          if (qrRef.current) {
+            qrRef.current.stop(); // Stop the QR reader once we get a valid result
+          } else {
+            console.warn("qrRef.current is null, cannot stop QR reader.");
+          }
+  
           // Automatically submit the QR code data for validation
           const response = await axios.post("/api/qr/validate-code", {
             enteredCode: parsedData.code,
             sessionId: parsedData.sessionId,
           });
-
+  
           console.log("API Response:", response.data);
-
+  
           if (response.data.valid) {
-            router.push("/Main"); // Redirect to main page on success
+            router.push("/Main"); // Redirect to the main page on success
           } else {
             alert("Invalid code, please try again.");
-            qrRef.current.start(); // Restart the QR reader if invalid
+            if (qrRef.current) {
+              qrRef.current.start(); // Restart the QR reader if invalid
+            }
           }
         } else {
           throw new Error("Invalid QR code format.");
         }
       } catch (err) {
-        console.error("Error processing QR code:", err);
-        alert("Error processing QR code.");
+        console.error("Error processing QR code:", err.message);
+        alert("Error processing QR code: " + err.message);
       }
     }
   };
+  
+  
 
   return (
     <>
