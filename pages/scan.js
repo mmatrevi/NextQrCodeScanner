@@ -22,12 +22,12 @@ export default function Scan() {
           setQrData({ code: parsedData.code, sessionId: parsedData.sessionId });
           setShowModal(true);
           qrRef.current.stop(); // Stop the QR reader once we get a valid result
-        } else {
-          throw new Error("Invalid QR code format.");
         }
       } catch (err) {
-        console.error("Error parsing QR code:", err);
-        alert("Invalid QR code format.");
+        if (!parsedData.code && !parsedData.sessionId) {
+          console.error("Error parsing QR code:", err);
+          alert("Invalid QR code format.");
+        }
       }
     }
 
