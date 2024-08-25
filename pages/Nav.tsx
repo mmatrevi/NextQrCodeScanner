@@ -68,7 +68,7 @@ export default function Nav() {
           <div className="flex flex-col sm:flex-row gap-y-2 sm:gap-x-4 cursor-pointer hidden sm:flex">
             <Link href="/">
               <a>
-                <p>Lecture Attendance Form</p>
+                <p>Smart2 Lecture Attendance App</p>
               </a>
             </Link>
           </div>

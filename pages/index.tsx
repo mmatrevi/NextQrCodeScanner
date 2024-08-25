@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Smart Attendance</title>
+        <title>Smart2 Attendance</title>
         <meta name="description" content="A stylish landing page using Tailwind CSS and Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
