@@ -2,5 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/ViewDataPage": "pages/ViewDataPage.js",
+  "/": "pages/index.js",
+  "/scan": "pages/scan.js",
+  "/generate-qr-front": "pages/generate-qr-front.js",
+  "/api/fetchSheetData": "pages/api/fetchSheetData.js"
 }
