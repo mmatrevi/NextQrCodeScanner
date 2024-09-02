@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Nav from "./Nav"
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -19,9 +20,11 @@ export default function Home() {
           <p className="text-xl mb-8 max-w-2xl">
             Discover the best solutions for your School. We offer a range of services in record taking tailored to meet your needs.
           </p>
-          <a href="/Apply" className="bg-white text-indigo-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
-            Get Started
-          </a>
+          <Link href="/Apply">
+            <a className="bg-white text-indigo-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
+              Get Started
+            </a>
+          </Link>
         </section>
 
         {/* Features Section */}

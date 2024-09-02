@@ -20,10 +20,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/ViewDataPage": [
+    "/Apply": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/ViewDataPage.js"
+      "static/chunks/pages/Apply.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
@@ -34,16 +34,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/generate-qr-front": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/generate-qr-front.js"
-    ],
-    "/scan": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/scan.js"
     ]
   },
   "ampFirstPages": []
