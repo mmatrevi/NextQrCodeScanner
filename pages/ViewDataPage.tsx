@@ -25,23 +25,54 @@ const ViewDataPage = () => {
     return (
         <>
             <Nav />
-            <main className="bg-gray-100 min-h-screen">
-                <div className="max-w-5xl mx-auto py-10 px-4">
-                    {/* Scrollable container for the table */}
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200 bg-white">
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {data.map((row, index) => (
-                                    <tr key={index}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{row[0]}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row[1]}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row[2]}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row[3]}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row[4]}</td>
+            <main className="bg-gradient-to-r from-blue-500 to-green-500 min-h-screen py-10">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+                        {/* Scrollable container for the table */}
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full divide-y divide-gray-200">
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Column 1
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Column 2
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Column 3
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Column 4
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Column 5
+                                        </th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {data.map((row, index) => (
+                                        <tr key={index}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                {row[0]}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {row[1]}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {row[2]}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {row[3]}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {row[4]}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </main>

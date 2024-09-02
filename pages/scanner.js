@@ -41,7 +41,7 @@ export default function Scan() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col mt-[5rem] justify-center items-center">
+      <main className="bg-gradient-to-b from-indigo-600 via-purple-600 to-pink-600 flex flex-col mt-[5rem] justify-center items-center">
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-4xl font-bold mb-4">QR Scanner</h1>
           <div>

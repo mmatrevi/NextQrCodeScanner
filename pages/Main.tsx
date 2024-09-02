@@ -32,7 +32,7 @@ const Main: NextPage = () => {
       });
 
       const content = await response.json();
-      
+
       // Reset the form fields
       setFirstname("");
       setLastname("");
@@ -42,7 +42,6 @@ const Main: NextPage = () => {
 
       // Set the submission status to true
       setIsSubmitted(true);
-      
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Something went wrong. Please try again.");
@@ -52,13 +51,13 @@ const Main: NextPage = () => {
   return (
     <>
       <Nav />
-      <main className="bg-gray-100 min-h-screen">
-        <div className="max-w-5xl mx-auto py-10">
+      <main className="bg-gradient-to-b from-indigo-600 via-purple-600 to-pink-600 min-h-screen flex items-center justify-center py-10">
+        <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
           {/* Conditionally render the form or thank you message */}
           {!isSubmitted ? (
-            <form className="py-4 space-y-4" onSubmit={handleSubmit}>
-              <div className="flex items-center justify-center">
-                <label htmlFor="firstname" className="sr-only">
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="firstname" className="block text-sm font-medium text-gray-700">
                   First Name
                 </label>
                 <input
@@ -67,12 +66,13 @@ const Main: NextPage = () => {
                   type="text"
                   name="firstname"
                   id="firstname"
-                  className="shadow-md focus:ring-indigo-500 focus:border-indigo-500 block w-64 sm:text-md border-gray-300 rounded-md"
-                  placeholder="First Name"
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter your first name"
+                  required
                 />
               </div>
-              <div className="flex items-center justify-center">
-                <label htmlFor="lastname" className="sr-only">
+              <div>
+                <label htmlFor="lastname" className="block text-sm font-medium text-gray-700">
                   Last Name
                 </label>
                 <input
@@ -81,12 +81,13 @@ const Main: NextPage = () => {
                   type="text"
                   name="lastname"
                   id="lastname"
-                  className="shadow-md focus:ring-indigo-500 focus:border-indigo-500 block w-64 sm:text-md border-gray-300 rounded-md"
-                  placeholder="Last Name"
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter your last name"
+                  required
                 />
               </div>
-              <div className="flex items-center justify-center">
-                <label htmlFor="email" className="sr-only">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email
                 </label>
                 <input
@@ -95,12 +96,13 @@ const Main: NextPage = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="shadow-md focus:ring-indigo-500 focus:border-indigo-500 block w-64 sm:text-md border-gray-300 rounded-md"
-                  placeholder="Email"
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter your email"
+                  required
                 />
               </div>
-              <div className="flex items-center justify-center">
-                <label htmlFor="phone" className="sr-only">
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                   Phone
                 </label>
                 <input
@@ -109,13 +111,14 @@ const Main: NextPage = () => {
                   type="tel"
                   name="phone"
                   id="phone"
-                  className="shadow-md focus:ring-indigo-500 focus:border-indigo-500 block w-64 sm:text-md border-gray-300 rounded-md"
-                  placeholder="Phone"
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter your phone number"
+                  required
                 />
               </div>
-              <div className="flex items-center justify-center">
-                <label htmlFor="company" className="sr-only">
-                  Student ID number
+              <div>
+                <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                  Student ID Number
                 </label>
                 <input
                   value={company}
@@ -123,22 +126,25 @@ const Main: NextPage = () => {
                   type="text"
                   name="company"
                   id="company"
-                  className="shadow-md focus:ring-indigo-500 focus:border-indigo-500 block w-64 sm:text-md border-gray-300 rounded-md"
-                  placeholder="Student ID number"
+                  className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Enter your Student ID number"
+                  required
                 />
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="flex items-center justify-center text-sm w-64 rounded-md shadow py-3 px-2 text-white bg-indigo-600"
+                  className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Save
                 </button>
               </div>
             </form>
           ) : (
-            <div className="text-center mt-20">
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">Thank you for submitting your information!</h2>
+            <div className="text-center">
+              <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+                Thank you for submitting your information!
+              </h2>
               <p className="text-gray-600">We have received your lecture attendance data.</p>
             </div>
           )}

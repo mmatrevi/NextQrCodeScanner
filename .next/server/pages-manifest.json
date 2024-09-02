@@ -2,6 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/Main": "pages/Main.js",
+  "/generate-qr-front": "pages/generate-qr-front.js",
   "/": "pages/index.js",
-  "/Apply": "pages/Apply.js"
+  "/ViewDataPage": "pages/ViewDataPage.js",
+  "/api/fetchSheetData": "pages/api/fetchSheetData.js",
+  "/scan": "pages/scan.js",
+  "/api/qr/generate-qr": "pages/api/qr/generate-qr.js"
 }

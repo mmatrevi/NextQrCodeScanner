@@ -13,7 +13,7 @@ export default function Home() {
       <Nav />
       <main className="bg-gray-50 min-h-screen flex flex-col items-center justify-center">
         {/* Hero Section */}
-        <section className="w-full flex flex-col items-center justify-center text-center py-20 px-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+        <section className="w-full flex flex-col items-center justify-center text-center py-20 px-5 bg-gradient-to-r from-blue-500 to-green-500 min-h-screen text-white">
           <h1 className="text-5xl font-extrabold mb-4">
             Welcome to Our Smart Attendance App
           </h1>

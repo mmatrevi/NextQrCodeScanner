@@ -20,10 +20,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/Apply": [
+    "/Main": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Apply.js"
+      "static/chunks/pages/Main.js"
+    ],
+    "/ViewDataPage": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/ViewDataPage.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
@@ -34,6 +39,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
+    ],
+    "/scan": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/scan.js"
     ]
   },
   "ampFirstPages": []

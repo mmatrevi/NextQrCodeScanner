@@ -10,7 +10,7 @@ export default function Register() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-      <main className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex flex-col items-center justify-center py-10">
+      <main className="bg-gradient-to-r from-blue-500 to-green-500 min-h-screen flex flex-col items-center justify-center py-10">
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
           <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Apply for our Service</h1>
           <form className="space-y-4">
